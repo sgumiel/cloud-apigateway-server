@@ -1,0 +1,21 @@
+server:
+  port: 9005
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+      
+spring:
+  application:
+    name: apigateway-tutorial
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+      - id: users-service
+        uri: lb://USERS-SERVICE
+        predicates:
+          - Path=/users/**
